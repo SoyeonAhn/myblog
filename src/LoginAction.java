@@ -37,8 +37,30 @@ public class LoginAction extends HttpServlet {
 		String pwd = request.getParameter("pwd");
 		String remember = request.getParameter("remember");
 		//checkbox name이 remember 이고 checked = on, unchecked = null 값을 받게 된다.
+		
+		//로그인이 성공했는지는 sessionLoginCheck에 가서 확인 remember만 확인 후 캐쉬 기억하고 안하고 넘겨준다.
+		if(remember!=null&&remember.equals("on")) {
+			//REMEMBER ME 쿠키 생성				
+			response.addCookie(
+					Cookies.createCookie("AUTH", id, "/", 60*60)
+					);	
+			response.addCookie(
+					Cookies.createCookie("REMEMBER", remember, "/", 60*60)
+					);	
+		}else{//쿠키 삭제 
+			response.addCookie(
+					Cookies.createCookie("AUTH", "", "/", 0)
+					);	
+			response.addCookie(
+					Cookies.createCookie("REMEMBER", "", "/", 0)
+					);
 
-		if(id.equals("asdf")&&pwd.equals("1234")) {
+		}
+		System.out.println("if문 통과 request위");
+		RequestDispatcher reqDis = request.getRequestDispatcher("/sessionLoginCheck.jsp");
+		reqDis.forward(request, response);	
+		//System.out.println("if문 통과 request아래");
+		/*if(id.equals("asdf")&&pwd.equals("1234")) {
 			if(remember!=null&&remember.equals("on")) {
 				System.out.println("로그인에 성공하였습니다.");
 				//REMEMBER ME 쿠키 생성				
@@ -70,7 +92,7 @@ public class LoginAction extends HttpServlet {
 			request.setAttribute("msg", "id 또는 비밀번호가 틀립니다.");		
 			RequestDispatcher reqDis = request.getRequestDispatcher("/loginForm2.jsp");
 			reqDis.forward(request, response);	
-		}
+		}*/
 	}
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)

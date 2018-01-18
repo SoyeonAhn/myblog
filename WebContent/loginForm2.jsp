@@ -72,8 +72,6 @@ span.psw {
 </head>
 <body>
 	<h2>Login Form</h2>
-
-
 <%
 String msg = (String) request.getAttribute("msg");
 System.out.println("msg는"+msg);
@@ -85,11 +83,25 @@ if(msg!=null){
 <%
 Cookies cookie = new Cookies(request);
 String idcookie = cookie.getValue("AUTH");
+String remembercookie = cookie.getValue("REMEMBER");
+System.out.println("remember : " + remembercookie);
+if(remembercookie!=null){
+	remembercookie = "checked = '' ";
+}else{
+	remembercookie = "";
+}
+/* 
+if(remembercookie!=null){
+	remembercookie = "checked = '' ";
+}else{
+	remembercookie = "";
+} */
 if(idcookie!=null){
 	idcookie = cookie.getValue("AUTH");
 }else{
 	idcookie = "";
 }
+
 %>
 
 	<form action="/LoginAction" method="post">
@@ -104,7 +116,7 @@ if(idcookie!=null){
 		<input type="password" placeholder="Enter Password" name="pwd" required>
 
 		<button type="submit">Login</button>
-		<label> <input type="checkbox" checked="checked" name="remember">
+		<label> <input type="checkbox" <%=remembercookie %> name="remember">
 		<!-- value = "checked" 가 있으면 value가 넘어가고 없으면 on/null이 넘어간다. -->
 			Remember me
 		</label>
@@ -114,7 +126,5 @@ if(idcookie!=null){
 			<span class="psw">Forgot <a href="#">password?</a></span>
 		</div>
 	</form>
-	
-
 </body>
 </html>
