@@ -31,7 +31,6 @@ if(idcookie!=null){
 <tr>
 	<td>ID : </td>
 	<td><input type="text" placeholder ="아이디를 입력하세요" name = "memberID" value = "<%--=idcookie--%>" required/><br></td>
-
 </tr>
 <tr>
 	<td>PWD : </td>

@@ -5,11 +5,11 @@
 
  <%
 request.setCharacterEncoding("utf-8");
-
+ System.out.println("joinCheck 통과");
 //로그인할 때 쓴 정보
 String memberID = request.getParameter("memberID");
 
-System.out.println("joinCheck 통과");
+System.out.println(memberID + "memberID값");
 %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -26,7 +26,7 @@ Statement stmt = null;
 ResultSet rs = null;
 
 try{
-	String jdbcDriver = "jdbc:mysql://localhost:3306/chap14db?"+"useUnicode = true&characterEncoding = utf8";
+	String jdbcDriver = "jdbc:mysql://localhost:3306/chap14db?"+"useUnicode = true&characterEncoding = utf8&characterEncoding=utf8&verifyCertificate=false&useSSL=true";
 	String dbUser = "root";
 	String dbPass = "rootpw";
 	
